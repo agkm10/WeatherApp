@@ -1,20 +1,12 @@
-
-
-      //----------------------HTML5 getLocation---------------
+ //----------------------HTML5 getLocation---------------
 $(document).ready(function() {
-
-$("#wtf").onClick(function() {
-  $("#wtf").fadeToggle();
-});
-
-
-
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
           var pos = {
             lat: position.coords.latitude,
             lng: position.coords.longitude
           };
+          $("#location").html(pos.lat + ", " + pos.lng);
         var key = "&key=AIzaSyBZj7pF8D1r85QEwNwTKYm0H5jDDXeQDo8";
           var googlePos = pos.lat + "," + pos.lng;
           var callAdd = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
@@ -29,8 +21,8 @@ $("#wtf").onClick(function() {
             console.log(googleState);
             $("#location").html(googleCity + ", " + googleState);
 
-            //-----------------Open Weather API-------------
-    //placed inside ip-api call for timing.
+  //-----------------Open Weather API-------------
+  //placed inside ip-api call for timing.
     $.getJSON("http://api.openweathermap.org/data/2.5/weather?zip=" + zip + "," + cc + ",&appid=1da331d282010b1df60431834e1145ae", function(result) {
       //Sets each variable with data from the JSON call (result).
       var forecast = result.weather[0].main;
@@ -50,6 +42,8 @@ $("#wtf").onClick(function() {
 
         });
        //Close if statement for geolocation check.
-      }
+     } else {
+       alert("Geolocation did not load");
+     }
  //Close document ready.
  });
