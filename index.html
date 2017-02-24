@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html >
+<html  ng-app="weatherApp">
 <head>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-   <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+
   <meta charset="UTF-8">
   <title>Weather App</title>
  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
  <link rel="stylesheet" href="css/style.css">
- <script src="js/index.js"></script>
+
  <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet">
 </head>
 
-<body>
+<body ng-controller="mainCtrl">
 <div class="main1">
   <div class="jumbotron main">
     <div class="heading">
@@ -21,10 +20,10 @@
     </div>
     <div class="weather">
 
-      <p id="location">Loading forecast...</p>
-      <p id="temp"></p>
-      <p id="forecast"></p>
-      <p id="icon"></p>
+      <p id="location">{{pos.city}},{{pos.state}}</p>
+      <p id="temp">{{pos.temp}}</p>
+      <p id="forecast">{{pos.forecast}}</p>
+      <p id="icon"><img src={{pos.icon}}></p>
 
     </div>
     <div class="footer">
@@ -33,6 +32,12 @@
   </div>
   <div>
 
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+       <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+        <!-- <script src="js/index.js"></script> -->
+         <script src="js/weatherApp.js"></script>
+          <script src="js/mainCtrl.js"></script>
+           <script src="js/weatherService.js"></script>
 </body>
 </html>

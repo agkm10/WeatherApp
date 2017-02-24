@@ -1,5 +1,6 @@
  //----------------------HTML5 getLocation---------------
 $(document).ready(function() {
+  console.log(navigator.geolocation)
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
           var pos = {
@@ -13,6 +14,7 @@ $(document).ready(function() {
           console.log(pos);
           console.log(callAdd + googlePos + key);
           $.getJSON(callAdd + googlePos + key, function(googleCall) {
+            console.log(googleCall)
             var googleCity = googleCall.results[0].address_components[3].long_name;
             var googleState = googleCall.results[0].address_components[5].short_name;
             var zip = googleCall.results[0].address_components[6].short_name;
