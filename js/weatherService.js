@@ -42,7 +42,8 @@ angular.module('weatherApp').service('weatherService', function($http, $q) {
                 city: googleCity,
                 state: googleState,
                 zip: zip,
-                cc: cc
+                cc: cc,
+                coords: googlePos
             }
             return myLocation
         })
@@ -51,20 +52,22 @@ angular.module('weatherApp').service('weatherService', function($http, $q) {
 
     var getOpenWeatherForecast = function(myLocation) {
         console.log(myLocation);
-        var openWeatherKey = ",&appid=1da331d282010b1df60431834e1145ae"
-        var openWeatherUrl = "http://api.openweathermap.org/data/2.5/weather?zip=" + myLocation.zip + myLocation.cc + openWeatherKey
-        return $http({
-            method: 'GET',
-            url: openWeatherUrl
-        }).then(function(openWeatherCall) {
-            console.log(openWeatherCall)
+        var darkSkyKey = "b37f081c85e68011733dc3e245f22102/"
+        var openWeatherUrl = "https://api.darksky.net/forecast/" + darkSkyKey+ myLocation.coords
+        return $http.get(openWeatherUrl)
+        .then(function(openWeatherCall) {
+            console.log("opnewaethercall ", openWeatherCall)
             var myForecast = {
                 city: myLocation.city,
                 state: myLocation.state,
-                forecast: openWeatherCall.data.weather[0].main,
-                icon: 'http://openweathermap.org/img/w/'+openWeatherCall.data.weather[0].icon+'.png',
-                temp: Math.floor(openWeatherCall.data.main.temp * (9 / 5) - 459.67)
+                forecast: openWeatherCall.currently.summary,
+                icon: openWeatherCall.currently.icon,
+                temp: Math.floor(openWeatherCall.currently.temperature)
+                // forecast: openWeatherCall.data.weather[0].main,
+                // icon: 'http://openweathermap.org/img/w/'+openWeatherCall.data.weather[0].icon+'.png',
+                // temp: Math.floor(openWeatherCall.data.main.temp * (9 / 5) - 459.67)
             }
+            console.log("myforecast ", myForecast)
             return myForecast
         })
     }

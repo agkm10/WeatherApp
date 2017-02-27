@@ -5,6 +5,11 @@ body {
   font-family: 'Hind', sans-serif;
   color: black;
 }
+figure {
+	margin: 5em auto;
+	width: 350px;
+	height: 150px;
+}
 /*--------MAIN------------*/
 .main1 {
   padding: 50px;
